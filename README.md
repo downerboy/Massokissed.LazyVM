@@ -16,20 +16,38 @@ Builds and looks after Hyper-V development virtual machines on a Windows host, u
 - A Windows 11 Enterprise Evaluation ISO, downloaded by hand from the [Microsoft Evaluation Center](https://www.microsoft.com/en-us/evalcenter/evaluate-windows-11-enterprise).
 - Memory and disk for each VM. By default a VM starts with 8 GB of memory and can grow to 16 GB, and its disks are 120 GB for Windows, 100 GB for SQL data and 250 GB for the Dev Drive, all dynamically expanding.
 
-## Getting started
+## Quick start
 
-Clone the repository into a folder named `Scripts` under the folder you want everything to live in. The folder above `Scripts` becomes the root that holds the VM disks, captured state and logs:
+Everything lives under one root folder, `D:\DevVM` in these steps. The scripts go in its `Scripts` folder, and the VM disks, ISO, captured state and logs are created beside it.
 
-```powershell
-git clone <repository URL> D:\DevVM\Scripts
-cd D:\DevVM\Scripts
-.\Build-LazyVM.ps1 -NewVM DevBox
-.\Build-LazyVM.ps1 -SetupCredentials -GuestUser 'yourname'
-.\Build-LazyVM.ps1
-.\Build-LazyVM.ps1 -RegisterSchedule
-```
+1. **Get the scripts.** Either download the zip and extract it into `D:\DevVM`, which creates `D:\DevVM\Scripts`, then unblock the downloaded files once:
 
-If you downloaded the files as a zip instead, unblock them once first: `Get-ChildItem D:\DevVM -Recurse | Unblock-File`.
+   ```powershell
+   Get-ChildItem D:\DevVM -Recurse | Unblock-File
+   ```
+
+   Or clone the repository: `git clone <repository URL> D:\DevVM\Scripts`.
+
+2. **Get the Windows ISO.** Download Windows 11 Enterprise Evaluation from the [Microsoft Evaluation Center](https://www.microsoft.com/en-us/evalcenter/evaluate-windows-11-enterprise) and save it as `D:\DevVM\ISO\Win11Ent_Eval.iso`. It sits behind a registration form, so the script cannot download it for you. If it is missing, the build stops when it gets to that step and, when you are running it yourself, opens that page in your browser.
+
+3. **Name the VM and store the account the script signs in to it with.** In an elevated PowerShell:
+
+   ```powershell
+   cd D:\DevVM\Scripts
+   .\Build-LazyVM.ps1 -NewVM DevBox
+   .\Build-LazyVM.ps1 -SetupCredentials -GuestUser 'yourname'
+   ```
+
+4. **Build it, then schedule its daily maintenance:**
+
+   ```powershell
+   .\Build-LazyVM.ps1
+   .\Build-LazyVM.ps1 -RegisterSchedule
+   ```
+
+   The build needs no further input. It turns Hyper-V on if needed, restarting the host and carrying on by itself, downloads the SQL Server installer, installs Windows, then installs everything in the tooling list.
+
+To change what gets installed before the first build, see the notes in `Config\LazyVM.Config.example.psd1`.
 
 The [operator guide](Build-LazyVM-Guide.docx) covers every command, setting and phase, and what to do when something goes wrong.
 

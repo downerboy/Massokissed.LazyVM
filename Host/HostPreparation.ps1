@@ -456,7 +456,19 @@ function Resolve-InstallationIso {
         Write-Log "  Download Windows 11 Enterprise (evaluation) from:" 'INFO'
         Write-Log "    $($CFG.ISODownloadPage)" 'INFO'
         Write-Log "  The download is behind a registration form and cannot be automated." 'INFO'
-        Write-Log "  Save the image as: $($CFG.ISOPath)" 'INFO'
+        Write-Log "  Save the image as $($CFG.ISOPath) and run the script again." 'INFO'
+
+        # Someone is at the keyboard, so take them straight to the form. A
+        # scheduled run has nobody to read the page and skips this.
+        if ([Environment]::UserInteractive) {
+            try {
+                Start-Process -FilePath $CFG.ISODownloadPage
+                Write-Log '  The download page has been opened in your browser.' 'INFO'
+            }
+            catch {
+                Write-Log "  Could not open the download page: $($_.Exception.Message)" 'WARN'
+            }
+        }
         Exit-WithError 'No valid Windows installation ISO is available.'
     }
 
