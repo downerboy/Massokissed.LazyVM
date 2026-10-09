@@ -28,7 +28,7 @@ Everything lives under one root folder, `D:\DevVM` in these steps. The scripts g
 
    Or clone the repository: `git clone <repository URL> D:\DevVM\Scripts`.
 
-2. **Get the Windows ISO.** Download Windows 11 Enterprise Evaluation from the [Microsoft Evaluation Center](https://www.microsoft.com/en-us/evalcenter/evaluate-windows-11-enterprise) and save it as `D:\DevVM\ISO\Win11Ent_Eval.iso`. It sits behind a registration form, so the script cannot download it for you. If it is missing, the build stops when it gets to that step and, when you are running it yourself, opens that page in your browser.
+2. **Get the Windows ISO.** Download Windows 11 Enterprise Evaluation from the [Microsoft Evaluation Center](https://www.microsoft.com/en-us/evalcenter/evaluate-windows-11-enterprise) and save it as `D:\DevVM\ISO\Win11Ent_Eval.iso`. It sits behind a registration form, so the script cannot download it for you. If it is missing, the build stops before changing anything and opens that page in your browser.
 
 3. **Name the VM and store the account the script signs in to it with.** In an elevated PowerShell:
 

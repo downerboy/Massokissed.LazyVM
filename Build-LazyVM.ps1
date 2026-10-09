@@ -417,6 +417,12 @@ try {
         $startPhase = [math]::Max($FromPhase, $resumePhase)
         if ($startPhase -gt 0) { Write-Log "Starting at Phase $startPhase" 'INFO' }
 
+        # The ISO is the one thing the script cannot download, so check for it
+        # before anything changes on the host, while whoever started the run
+        # is still there to fetch it. Left to Phase 4, a Hyper-V restart would
+        # hand it to the resume task, which runs as SYSTEM and can only log it.
+        if ($startPhase -le 2) { Resolve-InstallationIso }
+
         $needsFeatureInstall = $false
 
         if ($startPhase -le 0) {
