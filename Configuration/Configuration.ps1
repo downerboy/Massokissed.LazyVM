@@ -82,7 +82,10 @@ function Merge-UserSettings {
     }
 
     $problems = [System.Collections.Generic.List[string]]::new()
-    $changed = [System.Collections.Generic.List[string]]::new()
+
+    # Checked values are held here and applied only once every setting has
+    # passed, so a file with any problem leaves $Settings untouched.
+    $accepted = @{}
 
     foreach ($userKey in $userSettings.Keys) {
         # Match names case-insensitively, but keep the spelling the script uses.
@@ -125,8 +128,7 @@ function Merge-UserSettings {
             }
         }
 
-        $Settings[$name] = $value
-        $changed.Add($name)
+        $accepted[$name] = $value
     }
 
     if ($problems.Count -gt 0) {
@@ -134,7 +136,10 @@ function Merge-UserSettings {
         throw "Your settings file has $($problems.Count) problem(s); nothing has been changed:`n  $UserPath`n$list"
     }
 
-    return @($changed | Sort-Object)
+    foreach ($name in $accepted.Keys) {
+        $Settings[$name] = $accepted[$name]
+    }
+    return @($accepted.Keys | Sort-Object)
 }
 
 function Resolve-SettingsRoot {
