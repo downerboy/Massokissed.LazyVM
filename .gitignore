@@ -1,0 +1,9 @@
+# Each host's own VMs: their profiles, tooling lists and tooling history.
+# Created by -NewVM; never part of the kit.
+Config/VMs/
+
+# Each user's own settings file, copied from LazyVM.Config.example.psd1.
+Config/LazyVM.Config.psd1
+
+# Word's lock file while the guide is open.
+~$*

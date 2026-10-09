@@ -1,0 +1,74 @@
+﻿{
+  "Version": 1,
+  "RecordedAt": "",
+  "Description": "Default tooling list for a VM that has none of its own yet. Replaced when the script is updated; a VM's own list is Config\\VMs\\<Name>\\Tooling.json.",
+  "Products": [
+    {
+      "ProductId": "Microsoft.VisualStudio.Product.Community",
+      "ChannelId": "VisualStudio.18.Release",
+      "DisplayName": "Visual Studio Community 2026",
+      "IncludeRecommended": true,
+      "Components": [
+        "Microsoft.VisualStudio.Workload.NetWeb",
+        "Microsoft.VisualStudio.Workload.Data",
+        "Microsoft.VisualStudio.Workload.ManagedDesktop",
+        "Microsoft.VisualStudio.Workload.NativeDesktop",
+        "Microsoft.VisualStudio.Component.SQL.LocalDB",
+        "Microsoft.VisualStudio.Component.Git"
+      ],
+      "Extensions": [],
+      "UserExtensions": []
+    },
+    {
+      "ProductId": "Microsoft.VisualStudio.Product.Ssms",
+      "ChannelId": "SSMS.22.SSMS.Release",
+      "DisplayName": "SQL Server Management Studio 22",
+      "Components": [
+        "Component.VisualStudio.GitHub.Copilot",
+        "Microsoft.Component.HelpViewer",
+        "Microsoft.NetCore.Component.Runtime.10.0",
+        "Microsoft.NetCore.Component.SDK",
+        "Microsoft.SSMS.Component.Core",
+        "Microsoft.SSMS.Component.DevOps",
+        "Microsoft.SSMS.Component.QueryHintTool",
+        "Microsoft.SqlServer.Workload.SSMS.AI",
+        "Microsoft.SqlServer.Workload.SSMS.BI",
+        "Microsoft.SqlServer.Workload.SSMS.CodeTools",
+        "Microsoft.VisualStudio.Component.CoreEditor",
+        "Microsoft.VisualStudio.Component.Roslyn.Compiler",
+        "Microsoft.VisualStudio.Component.Roslyn.LanguageServices",
+        "Microsoft.VisualStudio.Component.TeamExplorer.MinGit",
+        "Microsoft.VisualStudio.Workload.SSMSCore"
+      ],
+      "Extensions": [],
+      "UserExtensions": []
+    }
+  ],
+  "WingetPackages": [
+    {
+      "Id": "7zip.7zip",
+      "Source": "winget"
+    },
+    {
+      "Id": "icsharpcode.ILSpy",
+      "Source": "winget"
+    },
+    {
+      "Id": "JetBrains.dotPeek",
+      "Source": "winget"
+    },
+    {
+      "Id": "LINQPad.LINQPad.9",
+      "Source": "winget"
+    },
+    {
+      "Id": "Notepad++.Notepad++",
+      "Source": "winget"
+    },
+    {
+      "Id": "WinMerge.WinMerge",
+      "Source": "winget"
+    }
+  ],
+  "Programs": []
+}

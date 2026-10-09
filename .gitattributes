@@ -1,0 +1,11 @@
+# Line endings: normalised in the repository, Windows line endings when
+# checked out, so every copy of the scripts is byte-for-byte the same on
+# any machine that clones it.
+* text=auto
+*.ps1  text eol=crlf
+*.psm1 text eol=crlf
+*.psd1 text eol=crlf
+*.json text eol=crlf
+
+# Binary: never merged or converted.
+*.docx binary
