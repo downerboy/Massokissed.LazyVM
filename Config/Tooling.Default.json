@@ -1,23 +1,198 @@
 ﻿{
   "Version": 1,
-  "RecordedAt": "",
+  "RecordedAt": "2026-10-08T20:17:42.2138422-07:00",
   "Description": "Default tooling list for a VM that has none of its own yet. Replaced when the script is updated; a VM's own list is Config\\VMs\\<Name>\\Tooling.json.",
   "Products": [
     {
       "ProductId": "Microsoft.VisualStudio.Product.Community",
       "ChannelId": "VisualStudio.18.Release",
       "DisplayName": "Visual Studio Community 2026",
-      "IncludeRecommended": true,
       "Components": [
-        "Microsoft.VisualStudio.Workload.NetWeb",
+        "android",
+        "Component.Android.SDK.MAUI",
+        "Component.Microsoft.NET.AppModernization",
+        "Component.Microsoft.VisualStudio.RazorExtension",
+        "Component.Microsoft.VisualStudio.Web.AzureFunctions",
+        "Component.Microsoft.Web.LibraryManager",
+        "Component.OpenJDK",
+        "Component.VisualStudio.GitHub.Copilot",
+        "ComponentGroup.Copilot.Azure.Skills",
+        "ComponentGroup.Copilot.DotNet.Skills",
+        "ComponentGroup.Microsoft.NET.AppModernization",
+        "ios",
+        "maccatalyst",
+        "maui.blazor",
+        "maui.core",
+        "maui.windows",
+        "Microsoft.Component.Azure.DataLake.Tools",
+        "Microsoft.Component.ClickOnce",
+        "Microsoft.Component.CodeAnalysis.SDK",
+        "Microsoft.Component.HelpViewer",
+        "Microsoft.Component.MSBuild",
+        "Microsoft.Component.NetFX.Native",
+        "Microsoft.Component.PythonTools",
+        "Microsoft.Component.PythonTools.Web",
+        "Microsoft.ComponentGroup.Blend",
+        "Microsoft.ComponentGroup.ClickOnce.Publish",
+        "Microsoft.ComponentGroup.PythonTools.NativeDevelopment",
+        "Microsoft.Net.Component.4.7.2.TargetingPack",
+        "Microsoft.Net.Component.4.8.1.SDK",
+        "Microsoft.Net.Component.4.8.1.TargetingPack",
+        "Microsoft.Net.Component.4.8.SDK",
+        "Microsoft.Net.Component.4.8.TargetingPack",
+        "Microsoft.Net.ComponentGroup.4.8.DeveloperTools",
+        "Microsoft.Net.ComponentGroup.DevelopmentPrerequisites",
+        "microsoft.net.runtime.android",
+        "microsoft.net.runtime.android.aot",
+        "microsoft.net.runtime.android.aot.net9",
+        "microsoft.net.runtime.android.net9",
+        "microsoft.net.runtime.ios",
+        "microsoft.net.runtime.ios.net9",
+        "microsoft.net.runtime.maccatalyst",
+        "microsoft.net.runtime.maccatalyst.net9",
+        "microsoft.net.runtime.mono.tooling",
+        "microsoft.net.runtime.mono.tooling.net9",
+        "microsoft.net.sdk.emscripten",
+        "Microsoft.NetCore.Component.DevelopmentTools",
+        "Microsoft.NetCore.Component.Runtime.10.0",
+        "Microsoft.NetCore.Component.Runtime.7.0",
+        "Microsoft.NetCore.Component.Runtime.8.0",
+        "Microsoft.NetCore.Component.Runtime.9.0",
+        "Microsoft.NetCore.Component.SDK",
+        "Microsoft.NetCore.Component.Web",
+        "Microsoft.VisualStudio.Component.AppInsights.Tools",
+        "Microsoft.VisualStudio.Component.AspNet",
+        "Microsoft.VisualStudio.Component.AspNet45",
+        "Microsoft.VisualStudio.Component.ClassDesigner",
+        "Microsoft.VisualStudio.Component.CoreEditor",
+        "Microsoft.VisualStudio.Component.Debugger.JustInTime",
+        "Microsoft.VisualStudio.Component.DependencyValidation.Community",
+        "Microsoft.VisualStudio.Component.DiagnosticTools",
+        "Microsoft.VisualStudio.Component.DockerTools",
+        "Microsoft.VisualStudio.Component.DotNetModelBuilder",
+        "Microsoft.VisualStudio.Component.EntityFramework",
+        "Microsoft.VisualStudio.Component.FSharp",
+        "Microsoft.VisualStudio.Component.FSharp.Desktop",
+        "Microsoft.VisualStudio.Component.FSharp.WebTemplates",
+        "Microsoft.VisualStudio.Component.Git",
+        "Microsoft.VisualStudio.Component.GraphDocument",
+        "Microsoft.VisualStudio.Component.Graphics",
+        "Microsoft.VisualStudio.Component.Graphics.Tools",
+        "Microsoft.VisualStudio.Component.IISExpress",
+        "Microsoft.VisualStudio.Component.IntelliCode",
+        "Microsoft.VisualStudio.Component.JavaScript.Diagnostics",
+        "Microsoft.VisualStudio.Component.JavaScript.TypeScript",
+        "Microsoft.VisualStudio.Component.LinqToSql",
+        "Microsoft.VisualStudio.Component.ManagedDesktop.Core",
+        "Microsoft.VisualStudio.Component.ManagedDesktop.Prerequisites",
+        "Microsoft.VisualStudio.Component.MSODBC.SQL",
+        "Microsoft.VisualStudio.Component.MSSQL.CMDLnUtils",
+        "Microsoft.VisualStudio.Component.NuGet",
+        "Microsoft.VisualStudio.Component.Roslyn.Compiler",
+        "Microsoft.VisualStudio.Component.Roslyn.LanguageServices",
+        "Microsoft.VisualStudio.Component.SQL.CLR",
+        "Microsoft.VisualStudio.Component.SQL.DataSources",
+        "Microsoft.VisualStudio.Component.SQL.LocalDB.Runtime",
+        "Microsoft.VisualStudio.Component.SQL.SSDT",
+        "Microsoft.VisualStudio.Component.TextTemplating",
+        "Microsoft.VisualStudio.Component.TypeScript.TSServer",
+        "Microsoft.VisualStudio.Component.VC.CoreIde",
+        "Microsoft.VisualStudio.Component.VC.DiagnosticTools",
+        "Microsoft.VisualStudio.Component.VC.Tools.x86.x64",
+        "Microsoft.VisualStudio.Component.VisualStudioData",
+        "Microsoft.VisualStudio.Component.Web",
+        "Microsoft.VisualStudio.Component.WebDeploy",
+        "Microsoft.VisualStudio.Component.Windows10SDK",
+        "Microsoft.VisualStudio.Component.Windows11SDK.26100",
+        "Microsoft.VisualStudio.Component.Windows11SDK.28000",
+        "Microsoft.VisualStudio.Component.WindowsAppSdkSupport.CSharp",
+        "Microsoft.VisualStudio.Component.WslDebugging",
+        "Microsoft.VisualStudio.ComponentGroup.Azure.Prerequisites",
+        "Microsoft.VisualStudio.ComponentGroup.AzureFunctions",
+        "Microsoft.VisualStudio.ComponentGroup.Maui.All",
+        "Microsoft.VisualStudio.ComponentGroup.Maui.Android",
+        "Microsoft.VisualStudio.ComponentGroup.Maui.Blazor",
+        "Microsoft.VisualStudio.ComponentGroup.Maui.iOS",
+        "Microsoft.VisualStudio.ComponentGroup.Maui.MacCatalyst",
+        "Microsoft.VisualStudio.ComponentGroup.Maui.Shared",
+        "Microsoft.VisualStudio.ComponentGroup.Maui.Windows",
+        "Microsoft.VisualStudio.ComponentGroup.MSIX.Packaging",
+        "Microsoft.VisualStudio.ComponentGroup.UWP.NetCoreAndStandard",
+        "Microsoft.VisualStudio.ComponentGroup.UWP.Support",
+        "Microsoft.VisualStudio.ComponentGroup.Web",
+        "Microsoft.VisualStudio.ComponentGroup.Web.CloudTools",
+        "Microsoft.VisualStudio.ComponentGroup.WebToolsExtensions",
+        "Microsoft.VisualStudio.ComponentGroup.WebToolsExtensions.TemplateEngine",
+        "Microsoft.VisualStudio.ComponentGroup.WindowsAppDevelopment.Prerequisites",
+        "Microsoft.VisualStudio.Workload.Azure",
+        "Microsoft.VisualStudio.Workload.CoreEditor",
         "Microsoft.VisualStudio.Workload.Data",
+        "Microsoft.VisualStudio.Workload.DataScience",
         "Microsoft.VisualStudio.Workload.ManagedDesktop",
-        "Microsoft.VisualStudio.Workload.NativeDesktop",
-        "Microsoft.VisualStudio.Component.SQL.LocalDB",
-        "Microsoft.VisualStudio.Component.Git"
+        "Microsoft.VisualStudio.Workload.NetCrossPlat",
+        "Microsoft.VisualStudio.Workload.NetWeb",
+        "Microsoft.VisualStudio.Workload.Python",
+        "Microsoft.VisualStudio.Workload.Universal",
+        "runtimes.ios",
+        "runtimes.ios.net9",
+        "runtimes.maccatalyst",
+        "runtimes.maccatalyst.net9",
+        "wasm.tools"
       ],
-      "Extensions": [],
-      "UserExtensions": []
+      "Extensions": [
+        "https://marketplace.visualstudio.com/items?itemName=TeamXavalon.XAMLStyler2022"
+      ],
+      "UserExtensions": [
+        {
+          "Id": "41521019-e4c7-480c-8ea8-fc4a2c6f50aa",
+          "DisplayName": "SQLite and SQL Server Compact Toolbox",
+          "Publisher": "ErikEJ",
+          "MoreInfo": "https://github.com/ErikEJ/SqlCeToolbox",
+          "MarketplaceItem": "ErikEJ.SQLServerCompactSQLiteToolbox"
+        },
+        {
+          "Id": "f4c4712c-ceae-4803-8e52-0e2049d5de9f",
+          "DisplayName": "EF Core Power Tools",
+          "Publisher": "ErikEJ",
+          "MoreInfo": "https://github.com/ErikEJ/EFCorePowerTools/wiki/",
+          "MarketplaceItem": "ErikEJ.EFCorePowerTools"
+        },
+        {
+          "Id": "HiberbeeTheme.5b8ec20c-e115-4646-a8f4-4710b4eee183",
+          "DisplayName": "Hiberbee Theme",
+          "Publisher": "Sergiy Egoshyn",
+          "MoreInfo": "https://github.com/sergiye/hiberbeeTheme",
+          "MarketplaceItem": "SergiyEgoshyn.HiberbeeTheme"
+        },
+        {
+          "Id": "MidnightDeep.e1e706e2-05d3-4da9-8754-652cd8ab65f4",
+          "DisplayName": "Midnight Deep Theme",
+          "Publisher": "Austin Standing",
+          "MoreInfo": "https://github.com/austinstanding/midnight-deep-vstheme",
+          "MarketplaceItem": "AustinStanding.vsthememidnightdeep"
+        },
+        {
+          "Id": "TemplateStudioForWinUICs.843dd154-7a62-4aab-8482-1ce4c73cb580",
+          "DisplayName": "Template Studio for WinUI (C#)",
+          "Publisher": "Microsoft",
+          "MoreInfo": "https://github.com/microsoft/TemplateStudio/",
+          "MarketplaceItem": "TemplateStudio.TemplateStudioForWinUICs"
+        },
+        {
+          "Id": "VisualStudioThemePack.453e3fa1-2e0e-467e-abbd-1d08fe6468d1",
+          "DisplayName": "Visual Studio Theme Pack",
+          "Publisher": "Microsoft DevLabs",
+          "MoreInfo": "",
+          "MarketplaceItem": "idex.vsthemepack"
+        },
+        {
+          "Id": "ZeroVSTheme.e2e706e2-05d3-4da9-8754-652cd8ab60f4",
+          "DisplayName": "Zero (Dark Theme)",
+          "Publisher": "AgitoReiKen",
+          "MoreInfo": "",
+          "MarketplaceItem": "AgitoReiKen.zerovstheme"
+        }
+      ]
     },
     {
       "ProductId": "Microsoft.VisualStudio.Product.Ssms",
@@ -28,12 +203,12 @@
         "Microsoft.Component.HelpViewer",
         "Microsoft.NetCore.Component.Runtime.10.0",
         "Microsoft.NetCore.Component.SDK",
-        "Microsoft.SSMS.Component.Core",
-        "Microsoft.SSMS.Component.DevOps",
-        "Microsoft.SSMS.Component.QueryHintTool",
         "Microsoft.SqlServer.Workload.SSMS.AI",
         "Microsoft.SqlServer.Workload.SSMS.BI",
         "Microsoft.SqlServer.Workload.SSMS.CodeTools",
+        "Microsoft.SSMS.Component.Core",
+        "Microsoft.SSMS.Component.DevOps",
+        "Microsoft.SSMS.Component.QueryHintTool",
         "Microsoft.VisualStudio.Component.CoreEditor",
         "Microsoft.VisualStudio.Component.Roslyn.Compiler",
         "Microsoft.VisualStudio.Component.Roslyn.LanguageServices",
@@ -50,15 +225,71 @@
       "Source": "winget"
     },
     {
-      "Id": "icsharpcode.ILSpy",
+      "Id": "Git.Git",
       "Source": "winget"
     },
     {
-      "Id": "JetBrains.dotPeek",
+      "Id": "GitHub.cli",
+      "Source": "winget"
+    },
+    {
+      "Id": "GitHub.GitHubDesktop",
       "Source": "winget"
     },
     {
       "Id": "LINQPad.LINQPad.9",
+      "Source": "winget"
+    },
+    {
+      "Id": "Microsoft.CLRTypesSQLServer.2019",
+      "Source": "winget"
+    },
+    {
+      "Id": "Microsoft.msodbcsql.17",
+      "Source": "winget"
+    },
+    {
+      "Id": "Microsoft.msodbcsql.18",
+      "Source": "winget"
+    },
+    {
+      "Id": "Microsoft.PowerShell",
+      "Source": "winget"
+    },
+    {
+      "Id": "Microsoft.SQLServer.OLEDBDriver",
+      "Source": "winget"
+    },
+    {
+      "Id": "Microsoft.VCRedist.2015+.x64",
+      "Source": "winget"
+    },
+    {
+      "Id": "Microsoft.VCRedist.2015+.x86",
+      "Source": "winget"
+    },
+    {
+      "Id": "Microsoft.VisualStudioCode",
+      "Source": "winget"
+    },
+    {
+      "Id": "Microsoft.WebDeploy",
+      "Source": "winget"
+    },
+    {
+      "Id": "Microsoft.WindowsSDK.10.0.26100",
+      "Source": "winget"
+    },
+    {
+      "Id": "Microsoft.WindowsSDK.10.0.28000",
+      "Source": "winget"
+    },
+    {
+      "Id": "Microsoft.WindowsTerminal",
+      "Source": "winget"
+    },
+    {
+      "Id": "Microsoft.WSL",
       "Source": "winget"
     },
     {

@@ -48,6 +48,15 @@
     # Not set here: each VM is built from its tooling list,
     # Config\VMs\<Name>\Tooling.json, which the daily maintenance run keeps
     # up to date with what is installed in the guest.
+    #
+    # A new VM with no list of its own is built from Config\Tooling.Default.json:
+    # Visual Studio 2026 Community with the web, .NET desktop, MAUI, Azure,
+    # data, Python and Windows app workloads, SSMS 22, a few extensions and
+    # themes, and winget tools such as Git, VS Code, LINQPad, Notepad++ and
+    # WinMerge. To change it before the first build, copy it to
+    # Config\VMs\<Name>\Tooling.json and edit the copy:
+    # remove what you don't want, or add winget package ids. Edit the copy, not
+    # Tooling.Default.json, which is replaced when the script is updated.
 
     # ── Rebuild on evaluation expiry ────────────────────────────────────────
     # RebuildThresholdDays       = 10
