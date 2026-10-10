@@ -40,5 +40,6 @@ Export-ModuleMember -Function @(
     'New-UnattendSeedDisk',
     'Remove-UnattendSeedDisk',
     'Resolve-InstallationIso',
+    'Start-VMFromInstallMedia',
     'Unregister-ResumeTask'
 )

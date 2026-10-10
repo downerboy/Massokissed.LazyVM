@@ -115,6 +115,54 @@ function Invoke-Phase6-VMBuild {
     Write-Log "VM '$($CFG.VMName)' built" 'OK'
 }
 
+function Start-VMFromInstallMedia {
+    <#
+      Starts a VM that is to boot Windows Setup from the ISO. The ISO's boot
+      loader shows "Press any key to boot from CD or DVD..." for a few
+      seconds; with no key pressed it falls through to the empty OS disk and
+      stops at "No operating system was loaded". An unattended build has
+      nobody at the console, so Enter is pressed here, through the VM's
+      virtual keyboard, for the first seconds after power-on. A press that
+      lands after the prompt has gone does nothing: the boot loader is still
+      loading Setup, and the answer file drives every page after that.
+    #>
+    param(
+        [Parameter(Mandatory)][string]$VMName,
+        [int]$Seconds = 15
+    )
+
+    Start-VM -Name $VMName | Out-Null
+
+    $pressed = 0
+    $deadline = (Get-Date).AddSeconds($Seconds)
+    while ((Get-Date) -lt $deadline) {
+        # The keyboard appears a moment after power-on, so it is looked up
+        # each time rather than once.
+        try {
+            $system = Get-CimInstance -Namespace 'root\virtualization\v2' -ClassName 'Msvm_ComputerSystem' `
+                -Filter "ElementName='$VMName'" -ErrorAction Stop
+            $keyboard = Get-CimAssociatedInstance -InputObject $system -ResultClassName 'Msvm_Keyboard' -ErrorAction Stop
+            if ($keyboard) {
+                $null = Invoke-CimMethod -InputObject $keyboard -MethodName 'TypeKey' -Arguments @{ keyCode = [uint32]0x0D } -ErrorAction Stop
+                $pressed++
+            }
+        }
+        catch {
+            # Not ready yet; the next pass tries again.
+        }
+        Start-Sleep -Milliseconds 500
+    }
+
+    if ($pressed -gt 0) {
+        Write-Log "VM started; Enter pressed $pressed time(s) to boot Windows Setup from the ISO" 'OK'
+    }
+    else {
+        Write-Log 'VM started, but its virtual keyboard could not be reached to boot from the ISO.' 'WARN'
+        Write-Log "  If the console shows 'No operating system was loaded', turn the VM off and run" 'INFO'
+        Write-Log "  this again with -FromPhase 7, or press a key in the console when it asks." 'INFO'
+    }
+}
+
 function Enable-VMTpm-Checked {
     param([Parameter(Mandatory)][string]$VMName)
 

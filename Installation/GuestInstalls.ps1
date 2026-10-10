@@ -24,7 +24,13 @@ function Invoke-Phase7-SilentInstalls {
 
     if ($vm.State -ne 'Running') {
         Write-Log "VM is '$($vm.State)' - starting it" 'INFO'
-        Start-VM -Name $CFG.VMName | Out-Null
+        if ($UsedUnattend) {
+            # Windows is still to be installed from the ISO.
+            Start-VMFromInstallMedia -VMName $CFG.VMName
+        }
+        else {
+            Start-VM -Name $CFG.VMName | Out-Null
+        }
     }
 
     if (-not $UsedUnattend) {
