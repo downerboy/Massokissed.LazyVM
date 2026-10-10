@@ -1,5 +1,5 @@
 ﻿# Massokissed.LazyVM.Maintenance.psm1
-# The licence, the daily maintenance run, rebuilds and the scheduled task.
+# The licence, the daily maintenance run, rebuilds, the scheduled task and removing a VM.
 #
 # Uses: Massokissed.LazyVM.Configuration, Massokissed.LazyVM.Capture, Massokissed.LazyVM.Common, Massokissed.LazyVM.Credentials, Massokissed.LazyVM.Guest, Massokissed.LazyVM.Host, Massokissed.LazyVM.Installation, Massokissed.LazyVM.Logging, Massokissed.LazyVM.Restore, Massokissed.LazyVM.Tooling.
 # Loaded by Build-LazyVM.ps1, which imports every Massokissed.LazyVM module into the
@@ -19,6 +19,7 @@ $CFG = Massokissed.LazyVM.Configuration\Get-LazyVMSettings
 $moduleFiles = @(
     'Licence.ps1',
     'Rebuild.ps1',
+    'RemoveVM.ps1',
     'Schedule.ps1'
 )
 foreach ($moduleFile in $moduleFiles) {
@@ -31,6 +32,7 @@ Export-ModuleMember -Function @(
     'Invoke-Maintenance',
     'Invoke-Rebuild',
     'Register-RebuildSchedule',
+    'Remove-LazyVM',
     'Show-LicenseStatus',
     'Stop-GuestGracefully'
 )

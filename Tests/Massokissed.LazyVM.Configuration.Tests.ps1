@@ -482,3 +482,21 @@ Describe 'Import-LazyVMConfiguration' {
             Should -Throw -ExpectedMessage "*'Bogus' is not a setting*"
     }
 }
+
+Describe 'Read-LazyVMSettings' {
+    AfterAll {
+        (Get-LazyVMSettings).Clear()
+    }
+
+    It 'reads another VM''s settings without changing the shared ones' {
+        $configDir = New-TestConfigDir -Profiles @{ Alpha = '@{}'; Beta = '@{}' }
+        Import-LazyVMConfiguration -ConfigDir $configDir -ScriptDir 'D:\DevVM\Scripts' -VMName 'Alpha' | Out-Null
+
+        $beta = Read-LazyVMSettings -ConfigDir $configDir -ScriptDir 'D:\DevVM\Scripts' -VMName 'Beta'
+
+        $beta.Settings.VMName | Should -Be 'Beta'
+        $beta.Settings.LogFile | Should -Be 'D:\DevVM\Logs\Beta.log'
+        (Get-LazyVMSettings).VMName | Should -Be 'Alpha'
+        [object]::ReferenceEquals($beta.Settings, (Get-LazyVMSettings)) | Should -BeFalse
+    }
+}

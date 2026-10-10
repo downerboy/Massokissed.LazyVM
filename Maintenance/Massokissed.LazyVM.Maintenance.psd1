@@ -5,12 +5,13 @@
     Author            = 'Massokissed'
     CompanyName       = 'Massokissed'
     Copyright         = '(c) Massokissed. All rights reserved.'
-    Description       = 'The licence, the daily maintenance run, rebuilds and the scheduled task.'
+    Description       = 'The licence, the daily maintenance run, rebuilds, the scheduled task and removing a VM.'
     PowerShellVersion = '5.1'
     FunctionsToExport = @(
         'Invoke-Maintenance',
         'Invoke-Rebuild',
         'Register-RebuildSchedule',
+        'Remove-LazyVM',
         'Show-LicenseStatus',
         'Stop-GuestGracefully'
     )

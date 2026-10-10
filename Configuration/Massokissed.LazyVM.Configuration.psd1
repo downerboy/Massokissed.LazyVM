@@ -9,8 +9,10 @@
     PowerShellVersion = '5.1'
     FunctionsToExport = @(
         'Get-LazyVMSettings',
+        'Get-VMProfileNames',
         'Import-LazyVMConfiguration',
-        'New-VMProfile'
+        'New-VMProfile',
+        'Read-LazyVMSettings'
     )
     CmdletsToExport   = @()
     VariablesToExport = @()

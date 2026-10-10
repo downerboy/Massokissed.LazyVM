@@ -51,6 +51,15 @@
 .PARAMETER From
     With -NewVM: the existing VM whose settings the new one starts from.
 
+.PARAMETER RemoveVM
+    Delete a VM and everything created for it, then exit: the Hyper-V VM with
+    its checkpoints, its disks (including the Dev Drive and its source code),
+    its scheduled tasks and resume registry key, its credentials, captured
+    state, logs and its profile in Config\VMs. What every VM uses (the ISO,
+    installers, scripts and settings) and anything another VM also uses is
+    kept. Lists it all first and asks you to type the VM's name, unless
+    -Force is given.
+
 .PARAMETER Root
     The folder that holds everything on the host: VM disks, ISO, installers,
     logs, credentials and captured state. Overrides Root in
@@ -163,6 +172,7 @@ param(
     [string]$VM,
     [string]$NewVM,
     [string]$From,
+    [string]$RemoveVM,
 
     # The host folder everything lives under. See .PARAMETER Root above.
     [string]$Root,
@@ -190,7 +200,7 @@ param(
     [switch]$Rebuild,          # capture -> retire -> build -> restore -> verify
     [switch]$Maintain,         # the scheduled task's entry point
     [switch]$SkipCapture,      # with -Rebuild: reuse the existing manifest
-    [switch]$Force             # with -Rebuild or -Revert: proceed without confirmation
+    [switch]$Force             # with -Rebuild, -Revert or -RemoveVM: proceed without confirmation
 )
 
 # StrictMode is pinned rather than 'Latest' so a future PowerShell release
@@ -251,12 +261,15 @@ try {
     if ($NewVM -and $VM) {
         throw 'Use -NewVM on its own (with -From if wanted); -VM is for working with an existing VM.'
     }
+    if ($RemoveVM -and ($NewVM -or ($VM -and $VM -ne $RemoveVM))) {
+        throw 'Use -RemoveVM <Name> on its own (with -Force if wanted).'
+    }
     $newProfilePath = $null
     if ($NewVM) {
         $newProfilePath = New-VMProfile -ConfigDir $configDir -Name $NewVM -From $From
     }
 
-    $selectedVM = if ($NewVM) { $NewVM } else { $VM }
+    $selectedVM = if ($NewVM) { $NewVM } elseif ($RemoveVM) { $RemoveVM } else { $VM }
     $configuration = Import-LazyVMConfiguration -ConfigDir $configDir `
         -ScriptDir $PSScriptRoot -RootOverride $Root -VMName $selectedVM
     $CFG = $configuration.Settings
@@ -295,6 +308,12 @@ try {
     $exitCode = 0
 
     try {
+        # First, before anything reads the VM's credentials, which it deletes.
+        if ($RemoveVM) {
+            $outcome = Remove-LazyVM -ConfigDir $configDir -ScriptDir $PSScriptRoot -RootOverride $Root -Force:$Force
+            exit $(if ($outcome -eq 'incomplete') { 1 } else { 0 })
+        }
+
         # Adopt the account name from -GuestUser or the credential store before
         # anything reads $CFG.GuestAdminUser.
         Sync-GuestUserFromStore -Requested $GuestUser

@@ -399,12 +399,14 @@ function New-VMProfile {
     return $path
 }
 
-function Import-LazyVMConfiguration {
+function Read-LazyVMSettings {
     <#
-      Loads the settings for one VM, in layers: the defaults, then the user's
+      Reads the settings for one VM, in layers: the defaults, then the user's
       host-wide file, then the VM's own profile. Then names everything after
       the VM, picks the root folder and resolves every host path against it.
-      Returns the settings together with what the startup log reports.
+      Returns them in a table of their own, together with what the startup
+      log reports, and leaves the shared settings untouched, so another VM's
+      settings can be read without disturbing this run's.
     #>
     param(
         [Parameter(Mandatory)][string]$ConfigDir,
@@ -445,13 +447,8 @@ function Import-LazyVMConfiguration {
     $settings.Root = $root.Path
     Resolve-HostPathSettings -Settings $settings -Root $root.Path
 
-    # Filled in place rather than replaced: every module holds a reference to
-    # this one table (see Get-LazyVMSettings).
-    $script:Settings.Clear()
-    foreach ($key in @($settings.Keys)) { $script:Settings[$key] = $settings[$key] }
-
     return [pscustomobject]@{
-        Settings    = $script:Settings
+        Settings    = $settings
         UserFile    = $userFile
         ChangedKeys = $changedKeys
         VMName      = $vm
@@ -460,6 +457,30 @@ function Import-LazyVMConfiguration {
         Root        = $root.Path
         RootSource  = $root.Source
     }
+}
+
+function Import-LazyVMConfiguration {
+    <#
+      Reads the settings for the VM this run is for (see Read-LazyVMSettings)
+      and makes them the shared settings every module uses.
+    #>
+    param(
+        [Parameter(Mandatory)][string]$ConfigDir,
+        [Parameter(Mandatory)][string]$ScriptDir,
+        [string]$RootOverride,
+        [string]$VMName
+    )
+
+    $configuration = Read-LazyVMSettings -ConfigDir $ConfigDir -ScriptDir $ScriptDir `
+        -RootOverride $RootOverride -VMName $VMName
+
+    # Filled in place rather than replaced: every module holds a reference to
+    # this one table (see Get-LazyVMSettings).
+    $script:Settings.Clear()
+    foreach ($key in @($configuration.Settings.Keys)) { $script:Settings[$key] = $configuration.Settings[$key] }
+    $configuration.Settings = $script:Settings
+
+    return $configuration
 }
 
 function Get-LazyVMSettings {

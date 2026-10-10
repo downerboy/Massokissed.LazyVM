@@ -49,6 +49,14 @@ Everything lives under one root folder, `D:\DevVM` in these steps. The scripts g
 
 To change what gets installed before the first build, see the notes in `Config\LazyVM.Config.example.psd1`.
 
+## Removing a VM
+
+```powershell
+.\Build-LazyVM.ps1 -RemoveVM DevBox
+```
+
+Deletes the VM and everything created for it: the Hyper-V VM and its checkpoints, its disks (the Dev Drive included, so push your work first), its scheduled tasks, credentials, captured state, logs and profile. It lists everything first and asks you to type the VM's name; `-Force` skips that. What every VM uses, and anything another VM also uses, is kept.
+
 The [operator guide](Build-LazyVM-Guide.docx) covers every command, setting and phase, and what to do when something goes wrong.
 
 ## Layout

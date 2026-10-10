@@ -26,6 +26,8 @@ Remove-Variable -Name moduleFiles, moduleFile
 # Used by the other modules or the main script. Everything else is internal.
 Export-ModuleMember -Function @(
     'Get-LazyVMSettings',
+    'Get-VMProfileNames',
     'Import-LazyVMConfiguration',
-    'New-VMProfile'
+    'New-VMProfile',
+    'Read-LazyVMSettings'
 )
