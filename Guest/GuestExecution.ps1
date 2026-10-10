@@ -199,7 +199,7 @@ function Wait-GuestReady {
             $session = New-PSSession -VMName $CFG.VMName -Credential $Credential -ErrorAction Stop
             try {
                 $provisioned = Invoke-Command -Session $session -ScriptBlock {
-                    # FirstLogonCommands sets this; without the seed disk it
+                    # FirstLogonCommands sets this; without the answer-file disc it
                     # will be absent, in which case a usable session is enough.
                     $key = 'HKLM:\SOFTWARE\LazyVM'
                     if (Test-Path $key) {

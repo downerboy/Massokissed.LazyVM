@@ -15,7 +15,7 @@
               registration form and cannot be fetched unattended).
     Phase 5 : SQLDisk.vhdx create-if-missing (never overwritten)
     Phase 6 : VM build — Gen 2, Secure Boot, vTPM, 4 vCPU, dynamic RAM, plus an
-              autounattend seed disk so Windows Setup and OOBE run unattended
+              answer-file disc so Windows Setup and OOBE run unattended
     Phase 7 : Guest wait, SQL data disk and Dev Drive, then the VM's tooling
               list: Visual Studio Installer products (Visual Studio, SSMS)
               with their workloads and extensions, SQL Server 2022
@@ -106,7 +106,7 @@
     rebuild only when rearms are exhausted.
 
 .PARAMETER NoUnattend
-    Do not build or attach the autounattend seed disk. Windows Setup and OOBE
+    Do not build or attach the answer-file disc. Windows Setup and OOBE
     then have to be completed by hand, and Phase 7 will wait for that.
 
 .PARAMETER RegisterSchedule
@@ -462,11 +462,11 @@ try {
         if ($startPhase -le 5) { Invoke-Phase5-SQLDisk; Invoke-Phase5b-DevDrive }
 
         if ($startPhase -le 6) {
-            # The seed disk must exist before Phase 6, which attaches it, and is
+            # The answer-file disc must exist before Phase 6, which attaches it, and is
             # only worth building for a VM that has not been created yet.
             if (-not $NoUnattend) {
                 if (Get-VM -Name $CFG.VMName -ErrorAction SilentlyContinue) {
-                    Write-Log 'VM already exists - not rebuilding the unattend seed disk' 'INFO'
+                    Write-Log 'VM already exists - not rebuilding the answer-file disc' 'INFO'
                 }
                 else {
                     $guestCredential = Get-GuestCredential -CreateIfMissing
@@ -483,7 +483,7 @@ try {
 
         if ($startPhase -le 7) {
             $seedAttached = @(
-                Get-VMHardDiskDrive -VMName $CFG.VMName -ErrorAction SilentlyContinue |
+                Get-VMDvdDrive -VMName $CFG.VMName -ErrorAction SilentlyContinue |
                     Where-Object { $_.Path -eq $CFG.SeedDiskPath }
             ).Count -gt 0
 

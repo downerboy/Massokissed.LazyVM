@@ -83,7 +83,7 @@
     # rather than the network, so it needs no network setup at all.
     EnableEnhancedSession = $true
 
-    SeedDiskPath      = 'VMs\{VM}-Seed.vhdx'
+    SeedDiskPath      = 'VMs\{VM}-Seed.iso'
 
     # Where manual Hyper-V checkpoints of the VM are stored. Automatic
     # checkpoints are turned off.

@@ -36,7 +36,7 @@ function Invoke-Phase7-SilentInstalls {
     if (-not $UsedUnattend) {
         # This is equally true of a VM that was set up by hand long ago, so the
         # wording must not read as an error in that case.
-        Write-Log 'No unattend seed disk is attached to this VM.' 'INFO'
+        Write-Log 'No answer-file disc is attached to this VM.' 'INFO'
         Write-Log '  If the guest is already installed and signed in, that is expected - carry on.' 'INFO'
         Write-Log "  If Windows Setup has not run yet, complete it by hand and create a local" 'INFO'
         Write-Log "  administrator named '$($CFG.GuestAdminUser)' with the stored password." 'INFO'
@@ -44,7 +44,7 @@ function Invoke-Phase7-SilentInstalls {
 
     Wait-GuestReady -Credential $credential -TimeoutMinutes $CFG.GuestWaitMinutes
 
-    # Provisioning is done, so the seed disk (which holds the guest password in
+    # Provisioning is done, so the answer-file disc (which holds the guest password in
     # clear text) is removed before anything else runs. Doing it here also
     # leaves the SQL disk as the only extra disk, so guest-side disk
     # identification below is unambiguous.

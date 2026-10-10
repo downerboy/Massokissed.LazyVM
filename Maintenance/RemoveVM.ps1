@@ -10,7 +10,7 @@
 #    registry          its resume key
 #    Hyper-V           the VM itself, with its checkpoints
 #    disks             OS disk (and any retired ones), SQL data disk, Dev Drive,
-#                      seed disk, and every disk Hyper-V reports attached to it
+#                      answer-file disc, and every disk Hyper-V reports attached to it
 #    folders           checkpoints, captured state, the VM's configuration
 #                      folder and its profile (Config\VMs\<Name>)
 #    files             credentials, Visual Studio settings backup, logs

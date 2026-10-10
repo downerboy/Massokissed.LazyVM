@@ -63,7 +63,7 @@ function Invoke-Rebuild {
         }
         Invoke-Phase6-VMBuild -UseUnattend:$useUnattend
 
-        $seedAttached = @(Get-VMHardDiskDrive -VMName $CFG.VMName -ErrorAction SilentlyContinue |
+        $seedAttached = @(Get-VMDvdDrive -VMName $CFG.VMName -ErrorAction SilentlyContinue |
                 Where-Object { $_.Path -eq $CFG.SeedDiskPath }).Count -gt 0
         Invoke-Phase7-SilentInstalls -UsedUnattend:($useUnattend -or $seedAttached)
         Invoke-Phase8-PostConfig
@@ -128,7 +128,6 @@ function Invoke-RetireCurrentVM {
         $osDrive = @(Get-VMHardDiskDrive -VMName $CFG.VMName |
                 Where-Object {
                     $_.Path -ne $CFG.SQLDiskPath -and
-                    $_.Path -ne $CFG.SeedDiskPath -and
                     $_.Path -ne $CFG.DevDrivePath
                 }) |
             Select-Object -First 1
@@ -172,7 +171,7 @@ function Invoke-RetireCurrentVM {
     }
     else { $retiredConfig = $null }
 
-    # The seed disk is rebuilt from scratch every time.
+    # The answer-file disc is rebuilt from scratch every time.
     if (Test-Path -LiteralPath $CFG.SeedDiskPath) {
         Remove-Item -LiteralPath $CFG.SeedDiskPath -Force -ErrorAction SilentlyContinue
     }

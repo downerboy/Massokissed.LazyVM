@@ -67,14 +67,16 @@ function Invoke-Phase6-VMBuild {
     Write-Log "ISO attached: $($CFG.ISOPath)" 'OK'
 
     if ($UseUnattend) {
-        # SCSI location 1. The OS disk stays at location 0 so the answer file's
-        # DiskID 0 always targets the right disk. The SQL data disk is attached
-        # later, in Phase 7, so Windows Setup never sees it.
-        Add-VMHardDiskDrive -VMName $CFG.VMName -Path $CFG.SeedDiskPath -ControllerType SCSI
-        Write-Log 'Unattend seed disk attached' 'OK'
+        # A second DVD drive: Windows Setup only reads autounattend.xml from
+        # removable media. The OS disk is then the only hard disk Setup sees,
+        # so the answer file's DiskID 0 always targets it; the SQL data disk
+        # and Dev Drive are attached later, in Phase 7.
+        Add-VMDvdDrive -VMName $CFG.VMName -Path $CFG.SeedDiskPath
+        Write-Log 'Answer-file disc attached' 'OK'
     }
 
-    $dvd = Get-VMDvdDrive -VMName $CFG.VMName
+    # The Windows ISO's drive, not the answer-file disc's, is the one to boot.
+    $dvd = @(Get-VMDvdDrive -VMName $CFG.VMName | Where-Object { $_.Path -eq $CFG.ISOPath })[0]
     $vhd = @(Get-VMHardDiskDrive -VMName $CFG.VMName | Where-Object { $_.Path -eq $osDiskPath })[0]
     $nic = Get-VMNetworkAdapter -VMName $CFG.VMName
     Set-VMFirmware -VMName $CFG.VMName -BootOrder $dvd, $vhd, $nic
